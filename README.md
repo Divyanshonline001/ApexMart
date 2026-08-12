@@ -47,12 +47,6 @@ npm run install-all
 
 ### Step 2: Configure Environment
 The server environment variables are already configured in `server/.env`. If you need to make changes, configure `server/.env`:
-```env
-PORT=5000
-MONGODB_URI=mongodb://127.0.0.1:27017/ecommerce
-JWT_SECRET=supersecuresecretkey12345!
-NODE_ENV=development
-```
 
 ### Step 3: Seed Database
 Populate MongoDB with sample categories, 10 realistic products, and default accounts:
