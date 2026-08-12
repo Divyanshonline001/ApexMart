@@ -43,10 +43,21 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/upload', uploadRoutes);
 
-// Basic route
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the E-commerce API' });
-});
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, '../client/dist')));
+
+  // Any non-API route should serve the React SPA index.html
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../', 'client', 'dist', 'index.html'));
+  });
+} else {
+  // Basic route in development
+  app.get('/', (req, res) => {
+    res.json({ message: 'Welcome to the E-commerce API' });
+  });
+}
 
 // 404 Handler
 app.use((req, res, next) => {
